@@ -1,0 +1,38 @@
+{
+    "name": "run_as_root/business-metrics-report",
+    "description": "Business metrics monitoring with Slack and email notifications for revenue and order tracking",
+    "type": "magento2-module",
+    "version": "1.0.0",
+    "license": "MIT",
+    "minimum-stability": "dev",
+    "prefer-stable": true,
+    "require": {
+        "magento/module-store": "*",
+        "magento/module-sales": "*",
+        "magento/module-cron": "*",
+        "magento/module-config": "*",
+        "magento/framework": "*",
+        "magento/module-email": "*",
+        "psr/log": "*"
+    },
+    "require-dev": {
+        "dealerdirect/phpcodesniffer-composer-installer": "^0.7 || ^1.0",
+        "magento/magento-coding-standard": "*",
+        "phpmd/phpmd": "^3@dev",
+        "phpstan/phpstan": "^1.9",
+        "phpunit/phpunit": "^12.0"
+    },
+    "config": {
+        "allow-plugins": {
+            "dealerdirect/phpcodesniffer-composer-installer": true
+        }
+    },
+    "autoload": {
+        "files": [
+            "registration.php"
+        ],
+        "psr-4": {
+            "RunAsRoot\\BusinessMetricsReport\\": ""
+        }
+    }
+}

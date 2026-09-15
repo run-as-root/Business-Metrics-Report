@@ -1,0 +1,71 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+
+    <preference for="RunAsRoot\BusinessMetricsReport\Api\Data\MetricResultInterface"
+                type="RunAsRoot\BusinessMetricsReport\Model\Data\MetricResult"/>
+    <preference for="RunAsRoot\BusinessMetricsReport\Api\Data\MetricComparisonsInterface"
+                type="RunAsRoot\BusinessMetricsReport\Model\Data\MetricComparisons"/>
+    <preference for="RunAsRoot\BusinessMetricsReport\Api\Data\MetricWithComparisonsInterface"
+                type="RunAsRoot\BusinessMetricsReport\Model\Data\MetricWithComparisons"/>
+    <preference for="RunAsRoot\BusinessMetricsReport\Api\Channel\Email\EmailFormattedReportInterface"
+                type="RunAsRoot\BusinessMetricsReport\Channel\Email\EmailFormattedReport"/>
+    <preference for="RunAsRoot\BusinessMetricsReport\Api\DateRangeServiceInterface"
+                type="RunAsRoot\BusinessMetricsReport\Service\DateRangeService"/>
+    <preference for="RunAsRoot\BusinessMetricsReport\Api\MetricsCollectionStrategyInterface"
+                type="RunAsRoot\BusinessMetricsReport\Service\MetricsCollectionStrategy"/>
+
+    <type name="RunAsRoot\BusinessMetricsReport\Model\Collector\OrderQueryFilter">
+        <arguments>
+            <argument name="filters" xsi:type="array">
+                <item name="order_status" xsi:type="object">RunAsRoot\BusinessMetricsReport\Model\Collector\Filter\OrderStatusQueryFilter</item>
+            </argument>
+        </arguments>
+    </type>
+
+    <type name="RunAsRoot\BusinessMetricsReport\Service\CollectMetricsService">
+        <arguments>
+            <argument name="collectors" xsi:type="array">
+                <item name="revenue" xsi:type="object">RunAsRoot\BusinessMetricsReport\Model\Collector\RevenueMetricCollector</item>
+                <item name="order_count" xsi:type="object">RunAsRoot\BusinessMetricsReport\Model\Collector\OrderCountMetricCollector</item>
+            </argument>
+        </arguments>
+    </type>
+
+    <type name="RunAsRoot\BusinessMetricsReport\Channel\Slack\SummaryMessageBuilder">
+        <arguments>
+            <argument name="titles" xsi:type="array">
+                <item name="daily" xsi:type="string">📊 Daily Business Metrics Report</item>
+                <item name="weekly" xsi:type="string">📊 Weekly Business Metrics Report</item>
+            </argument>
+        </arguments>
+    </type>
+
+    <type name="RunAsRoot\BusinessMetricsReport\Channel\Slack\NotificationChannel">
+        <arguments>
+            <argument name="formatters" xsi:type="array">
+                <item name="daily" xsi:type="object">RunAsRoot\BusinessMetricsReport\Channel\Slack\Formatter\DailyFormatter</item>
+                <item name="weekly" xsi:type="object">RunAsRoot\BusinessMetricsReport\Channel\Slack\Formatter\WeeklyFormatter</item>
+            </argument>
+        </arguments>
+    </type>
+
+    <type name="RunAsRoot\BusinessMetricsReport\Channel\Email\NotificationChannel">
+        <arguments>
+            <argument name="formatters" xsi:type="array">
+                <item name="daily" xsi:type="object">RunAsRoot\BusinessMetricsReport\Channel\Email\Formatter\DailyFormatter</item>
+                <item name="weekly" xsi:type="object">RunAsRoot\BusinessMetricsReport\Channel\Email\Formatter\WeeklyFormatter</item>
+            </argument>
+        </arguments>
+    </type>
+
+    <type name="RunAsRoot\BusinessMetricsReport\Service\NotificationDispatcher">
+        <arguments>
+            <argument name="channels" xsi:type="array">
+                <item name="slack" xsi:type="object">RunAsRoot\BusinessMetricsReport\Channel\Slack\NotificationChannel</item>
+                <item name="email" xsi:type="object">RunAsRoot\BusinessMetricsReport\Channel\Email\NotificationChannel</item>
+            </argument>
+        </arguments>
+    </type>
+
+</config>

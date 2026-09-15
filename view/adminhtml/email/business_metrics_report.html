@@ -1,0 +1,109 @@
+<!--@subject {{var subject}}@-->
+<!--@vars {
+"var subject":"Email Subject",
+"var headerTitle":"Header Title",
+"var headerPeriod":"Header Period Label",
+"var metrics":"Array of Metric Report Rows",
+"var metric.metricLabel":"Metric Label",
+"var metric.currentValue":"Metric Current Value",
+"var metric.hero.color":"Hero Value Color",
+"var metric.hero.text":"Hero Value Text",
+"var metric.hero.label":"Hero Value Label",
+"var metric.column1.label":"Comparison Column 1 Label",
+"var metric.column1.value":"Comparison Column 1 Value",
+"var metric.column1.changeColor":"Comparison Column 1 Change Color",
+"var metric.column1.changeText":"Comparison Column 1 Change Text",
+"var metric.column2.label":"Comparison Column 2 Label",
+"var metric.column2.value":"Comparison Column 2 Value",
+"var metric.column2.changeColor":"Comparison Column 2 Change Color",
+"var metric.column2.changeText":"Comparison Column 2 Change Text",
+"var metric.column3.label":"Comparison Column 3 Label",
+"var metric.column3.value":"Comparison Column 3 Value",
+"var metric.column3.changeColor":"Comparison Column 3 Change Color",
+"var metric.column3.changeText":"Comparison Column 3 Change Text"
+} @-->
+<!DOCTYPE html>
+<html lang="en">
+<body
+    style="margin:0;padding:0;background-color:#f1f5f9;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;">
+<table width="100%" cellpadding="0" cellspacing="0" border="0" bgcolor="#f1f5f9">
+    <tr>
+        <td align="center" style="padding:40px 20px;">
+            <table width="600" cellpadding="0" cellspacing="0" border="0" style="max-width:600px;width:100%;">
+                <tr>
+                    <td bgcolor="#0f172a" style="border-radius:12px 12px 0 0;padding:36px 40px;text-align:center;"><p
+                        style="margin:0 0 6px;font-size:11px;color:#64748b;letter-spacing:3px;text-transform:uppercase;font-weight:700;">
+                        Business Metrics</p>
+                        <h1 style="margin:0 0 10px;font-size:28px;font-weight:800;color:#f8fafc;letter-spacing:-0.5px;">
+                            {{var headerTitle}}</h1>
+                        <p style="margin:0;font-size:14px;color:#94a3b8;">{{var headerPeriod}}</p></td>
+                </tr>
+                <tr>
+                    <td bgcolor="#ffffff" style="padding:32px 40px;">
+                        <table width="100%" cellpadding="0" cellspacing="0" border="0">
+                            {{for metric in metrics}}
+                            <tr>
+                                <td style="padding-bottom:28px;">
+                                    <table width="100%" cellpadding="0" cellspacing="0" border="0"
+                                           style="border:1px solid #e2e8f0;border-radius:10px;">
+                                        <tr>
+                                            <td bgcolor="#ffffff"
+                                                style="padding:22px 28px 18px;border-radius:10px 10px 0 0;">
+                                                <p style="margin:0 0 10px;font-size:11px;color:#94a3b8;letter-spacing:2px;text-transform:uppercase;font-weight:700;">
+                                                    {{var metric.metricLabel}}</p>
+                                                <table width="100%" cellpadding="0" cellspacing="0" border="0">
+                                                    <tr>
+                                                        <td valign="bottom">
+                                                            <p style="margin:0;font-size:34px;font-weight:800;color:#0f172a;letter-spacing:-1px;line-height:1.1;">
+                                                                {{var metric.currentValue}}</p>
+                                                        </td>
+                                                        <td valign="middle" align="right" width="160">
+                                                            <p style="margin:0;font-size:18px;font-weight:700;color:{{var metric.hero.color}};">{{var metric.hero.text}}</p>
+                                                            <p style="margin:4px 0 0;font-size:11px;color:#94a3b8;text-align:right;">{{var metric.hero.label}}</p>
+                                                        </td>
+                                                    </tr>
+                                                </table>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td bgcolor="#f8fafc"
+                                                style="padding:16px 28px;border-top:1px solid #e2e8f0;border-radius:0 0 10px 10px;">
+                                                <table width="100%" cellpadding="0" cellspacing="0" border="0">
+                                                    <tr>
+                                                        <td style="width:33%;">
+                                                            <p style="margin:0 0 6px;font-size:10px;color:#94a3b8;text-transform:uppercase;letter-spacing:1.5px;font-weight:600;">{{var metric.column1.label}}</p>
+                                                            <p style="margin:0 0 3px;font-size:16px;font-weight:600;color:#334155;">{{var metric.column1.value}}</p>
+                                                            <p style="margin:0;font-size:12px;font-weight:700;color:{{var metric.column1.changeColor}};">{{var metric.column1.changeText}}</p>
+                                                        </td>
+                                                        <td style="width:33%;border-left:1px solid #e2e8f0;padding-left:20px;">
+                                                            <p style="margin:0 0 6px;font-size:10px;color:#94a3b8;text-transform:uppercase;letter-spacing:1.5px;font-weight:600;">{{var metric.column2.label}}</p>
+                                                            <p style="margin:0 0 3px;font-size:16px;font-weight:600;color:#334155;">{{var metric.column2.value}}</p>
+                                                            <p style="margin:0;font-size:12px;font-weight:700;color:{{var metric.column2.changeColor}};">{{var metric.column2.changeText}}</p>
+                                                        </td>
+                                                        <td style="width:33%;border-left:1px solid #e2e8f0;padding-left:20px;">
+                                                            <p style="margin:0 0 6px;font-size:10px;color:#94a3b8;text-transform:uppercase;letter-spacing:1.5px;font-weight:600;">{{var metric.column3.label}}</p>
+                                                            <p style="margin:0 0 3px;font-size:16px;font-weight:600;color:#334155;">{{var metric.column3.value}}</p>
+                                                            <p style="margin:0;font-size:12px;font-weight:700;color:{{var metric.column3.changeColor}};">{{var metric.column3.changeText}}</p>
+                                                        </td>
+                                                    </tr>
+                                                </table>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </td>
+                            </tr>
+                            {{/for}}
+                        </table>
+                    </td>
+                </tr>
+                <tr>
+                    <td bgcolor="#f8fafc"
+                        style="border-top:1px solid #e2e8f0;border-radius:0 0 12px 12px;padding:20px 40px;text-align:center;">
+                        <p style="margin:0;font-size:12px;color:#94a3b8;">Automated report &middot; RunAsRoot</p></td>
+                </tr>
+            </table>
+        </td>
+    </tr>
+</table>
+</body>
+</html>

@@ -1,0 +1,92 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Config:etc/system_file.xsd">
+    <system>
+        <tab id="run_as_root" translate="label" sortOrder="10">
+            <label>Run as Root</label>
+        </tab>
+        <section id="run_as_root_business_metrics_report" translate="label" sortOrder="100" showInDefault="1" showInWebsite="0" showInStore="0">
+            <label>Business Metrics Report</label>
+            <tab>run_as_root</tab>
+            <resource>RunAsRoot_BusinessMetricsReport::config</resource>
+            <group id="general" translate="label" sortOrder="10" showInDefault="1" showInWebsite="0" showInStore="0">
+                <label>General Settings</label>
+                <field id="daily_enabled" translate="label comment" type="select" sortOrder="10" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>Enable Daily Report</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <comment>Enable or disable daily notifications (all notification channels) with yesterday's metrics compared to same day week/month/year ago</comment>
+                </field>
+                <field id="daily_cron_schedule" translate="label comment" type="text" sortOrder="20" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>Daily Report Cron Schedule</label>
+                    <comment><![CDATA[Cron expression for daily notification schedule (default: 0 5 * * * = 5 AM daily). Reports yesterday's metrics compared to same day week/month/year ago. Format: minute hour day month weekday]]></comment>
+                    <validate>required-entry</validate>
+                    <depends>
+                        <field id="run_as_root_business_metrics_report/general/daily_enabled">1</field>
+                    </depends>
+                </field>
+                <field id="weekly_enabled" translate="label comment" type="select" sortOrder="30" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>Enable Weekly Report</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <comment>Enable or disable weekly notifications (all notification channels) with previous week's metrics (Monday-Sunday) compared to week before, same week last month, and same week last year</comment>
+                </field>
+                <field id="weekly_cron_schedule" translate="label comment" type="text" sortOrder="40" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>Weekly Report Cron Schedule</label>
+                    <comment><![CDATA[Cron expression for weekly notification schedule (default: 1 5 * * 1 = 5:01 AM on Mondays). Reports previous week (Mon-Sun) with comparisons. Format: minute hour day month weekday]]></comment>
+                    <validate>required-entry</validate>
+                    <depends>
+                        <field id="run_as_root_business_metrics_report/general/weekly_enabled">1</field>
+                    </depends>
+                </field>
+                <field id="fluctuation_decline_threshold" translate="label comment" type="text" sortOrder="50" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>Fluctuation Decline Threshold (%)</label>
+                    <comment>Percentage decline (negative number) that triggers a fluctuation alert in the report. Default: -15.</comment>
+                </field>
+                <field id="only_on_fluctuation" translate="label comment" type="select" sortOrder="60" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>Only Send on Fluctuation</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <comment>If enabled, reports (all notification channels) are only sent when a fluctuation is detected (see threshold above). Otherwise, reports are sent every time regardless of fluctuation.</comment>
+                </field>
+            </group>
+            <group id="slack" translate="label" sortOrder="20" showInDefault="1" showInWebsite="0" showInStore="0">
+                <label>Slack Integration</label>
+                <field id="enabled" translate="label comment" type="select" sortOrder="10" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>Enable Slack Notifications</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <comment>Enable or disable Slack notifications</comment>
+                </field>
+                <field id="bot_token" translate="label comment" type="obscure" sortOrder="20" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>Bot Token</label>
+                    <backend_model>Magento\Config\Model\Config\Backend\Encrypted</backend_model>
+                    <comment>Slack Bot token (xoxb-...) with chat:write scope</comment>
+                    <validate>required-entry</validate>
+                    <depends>
+                        <field id="run_as_root_business_metrics_report/slack/enabled">1</field>
+                    </depends>
+                </field>
+                <field id="channel_id" translate="label comment" type="text" sortOrder="30" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>Channel ID</label>
+                    <comment>Slack channel ID to post reports to (e.g. C0XXXXXXX)</comment>
+                    <validate>required-entry</validate>
+                    <depends>
+                        <field id="run_as_root_business_metrics_report/slack/enabled">1</field>
+                    </depends>
+                </field>
+            </group>
+            <group id="email" translate="label" sortOrder="30" showInDefault="1" showInWebsite="0" showInStore="0">
+                <label>Email Notifications</label>
+                <field id="enabled" translate="label comment" type="select" sortOrder="10" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>Enable Email Notifications</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <comment>Enable or disable email notifications</comment>
+                </field>
+                <field id="recipients" translate="label comment" type="text" sortOrder="20" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>Recipients</label>
+                    <comment>Comma-separated list of recipient email addresses</comment>
+                    <depends>
+                        <field id="run_as_root_business_metrics_report/email/enabled">1</field>
+                    </depends>
+                </field>
+            </group>
+        </section>
+    </system>
+</config>

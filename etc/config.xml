@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Store:etc/config.xsd">
+    <default>
+        <run_as_root_business_metrics_report>
+            <general>
+                <daily_enabled>1</daily_enabled>
+                <daily_cron_schedule>0 5 * * *</daily_cron_schedule>
+                <weekly_enabled>1</weekly_enabled>
+                <weekly_cron_schedule>1 5 * * 1</weekly_cron_schedule>
+                <fluctuation_decline_threshold>-15</fluctuation_decline_threshold>
+            </general>
+            <slack>
+                <enabled>0</enabled>
+                <bot_token backend_model="Magento\Config\Model\Config\Backend\Encrypted"/>
+            </slack>
+            <email>
+                <enabled>0</enabled>
+            </email>
+        </run_as_root_business_metrics_report>
+    </default>
+</config>

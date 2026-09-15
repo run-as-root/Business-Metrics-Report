@@ -1,0 +1,12 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Cron:etc/crontab.xsd">
+    <group id="default">
+        <job name="run_as_root_business_metrics_report_send_daily_notification" instance="RunAsRoot\BusinessMetricsReport\Cron\SendDailyMetricsNotification" method="execute">
+            <config_path>run_as_root_business_metrics_report/general/daily_cron_schedule</config_path>
+        </job>
+        <job name="run_as_root_business_metrics_report_send_weekly_notification" instance="RunAsRoot\BusinessMetricsReport\Cron\SendWeeklyMetricsNotification" method="execute">
+            <config_path>run_as_root_business_metrics_report/general/weekly_cron_schedule</config_path>
+        </job>
+    </group>
+</config>

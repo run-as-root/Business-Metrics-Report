@@ -1,0 +1,10 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Email:etc/email_templates.xsd">
+    <template id="run_as_root_business_metrics_report"
+              label="Business Metrics Report"
+              file="business_metrics_report.html"
+              type="html"
+              module="RunAsRoot_BusinessMetricsReport"
+              area="adminhtml"/>
+</config>
