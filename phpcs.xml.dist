@@ -1,0 +1,7 @@
+<?xml version="1.0"?>
+<ruleset name="RunAsRoot_BusinessMetricsReport">
+    <!-- Auto-discovery entry point for tools that don't accept --standard (e.g. CI).
+         Canonical ruleset stays phpcs-ruleset.xml, used directly by the documented
+         `vendor/bin/phpcs --standard=phpcs-ruleset.xml .` command. -->
+    <rule ref="phpcs-ruleset.xml"/>
+</ruleset>
