@@ -119,8 +119,6 @@ class MetricCardDataBuilder
 
     private function escapeString(string $value): string
     {
-        $escaped = $this->escaper->escapeHtml($value);
-
-        return is_string($escaped) ? $escaped : implode(' ', $escaped);
+        return $this->escaper->escapeHtml($value);
     }
 }
