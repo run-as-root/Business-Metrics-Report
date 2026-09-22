@@ -13,6 +13,7 @@ Automated daily and weekly business metric reports (revenue, order count) delive
 
 ## 📋 Table of Contents
 
+- [Screenshots](#-screenshots)
 - [Installation](#-installation)
 - [Configuration](#-configuration)
 - [How It Works](#-how-it-works)
@@ -20,6 +21,27 @@ Automated daily and weekly business metric reports (revenue, order count) delive
 - [Architecture](#-architecture)
 - [Contributing](#-contributing)
 - [License](#-license)
+
+## 🖼️ Screenshots
+
+<table>
+<tr>
+<td width="55%" valign="top">
+
+**Email report**
+
+<img src="docs/images/email-report.png" alt="Weekly business metrics email report showing revenue and order count cards with week-over-week, 4-week, and year-over-year comparisons" width="100%">
+
+</td>
+<td width="45%" valign="top">
+
+**Slack report**
+
+<img src="docs/images/slack-report.png" alt="Daily business metrics Slack thread showing revenue and order count with fluctuation indicators" width="100%">
+
+</td>
+</tr>
+</table>
 
 ## 📦 Installation
 
@@ -100,9 +122,9 @@ The dispatcher iterates all registered `NotificationChannelInterface` implementa
 
 **Only send on fluctuation** - if `general/only_on_fluctuation` is enabled, the dispatcher checks every metric's week-ago comparison against `general/fluctuation_decline_threshold` (default `-15`, i.e. a 15% decline) *before* dispatching to any channel. If no metric declined past the threshold, **no channel is notified at all** for that run - not Slack, not email. If disabled (default), every scheduled run notifies all enabled channels regardless of fluctuation.
 
-**Slack** - posts a Block Kit summary message via the Slack Web API (`chat.postMessage`), then posts the full detailed report as a thread reply. Independently of the dispatcher-level gate above, if any metric shows a decline past the same threshold vs the previous week, the Slack summary message itself includes a fluctuation warning banner. Requires a Bot token (`xoxb-...`) with `chat:write` scope and a channel ID.
+**Slack** - posts a Block Kit summary message via the Slack Web API (`chat.postMessage`), then posts the full detailed report as a thread reply. Independently of the dispatcher-level gate above, if any metric shows a decline past the same threshold vs the previous week, the Slack summary message itself includes a fluctuation warning banner. Requires a Bot token (`xoxb-...`) with `chat:write` scope and a channel ID. See a sample thread reply in [Screenshots](#-screenshots).
 
-**Email** - sends an HTML email (template `run_as_root_business_metrics_report`) to a comma-separated recipient list via Magento's `TransportBuilder`.
+**Email** - sends an HTML email (template `run_as_root_business_metrics_report`) to a comma-separated recipient list via Magento's `TransportBuilder`. See a sample rendered report in [Screenshots](#-screenshots).
 
 Both channels have separate `DailyFormatter` and `WeeklyFormatter` implementations selected by `reportType`.
 
