@@ -6,6 +6,12 @@
     "license": "MIT",
     "minimum-stability": "dev",
     "prefer-stable": true,
+    "repositories": [
+        {
+            "type": "composer",
+            "url": "https://mirror.mage-os.org/"
+        }
+    ],
     "require": {
         "magento/module-store": "*",
         "magento/module-sales": "*",
@@ -16,6 +22,7 @@
         "psr/log": "*"
     },
     "require-dev": {
+        "bitexpert/phpstan-magento": "*",
         "dealerdirect/phpcodesniffer-composer-installer": "^0.7 || ^1.0",
         "magento/magento-coding-standard": "*",
         "phpmd/phpmd": "^3@dev",
@@ -24,7 +31,8 @@
     },
     "config": {
         "allow-plugins": {
-            "dealerdirect/phpcodesniffer-composer-installer": true
+            "dealerdirect/phpcodesniffer-composer-installer": true,
+            "magento/composer-dependency-version-audit-plugin": false
         }
     },
     "autoload": {

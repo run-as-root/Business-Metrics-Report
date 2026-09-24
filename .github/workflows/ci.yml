@@ -1,0 +1,59 @@
+name: CI
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  compute_matrix:
+    runs-on: ubuntu-latest
+    outputs:
+      matrix: ${{ steps.supported-version.outputs.matrix }}
+    steps:
+      - uses: actions/checkout@v7
+      - uses: graycoreio/github-actions-magento2/supported-version@v8.11.0 # x-release-please-version
+        id: supported-version
+        with:
+          kind: currently-supported
+
+  check-extension:
+    needs: compute_matrix
+    uses: graycoreio/github-actions-magento2/.github/workflows/check-extension.yaml@v8.11.0 # x-release-please-version
+    with:
+      matrix: ${{ needs.compute_matrix.outputs.matrix }}
+
+  compute_latest_matrix:
+    runs-on: ubuntu-latest
+    outputs:
+      matrix: ${{ steps.supported-version.outputs.matrix }}
+    steps:
+      - uses: graycoreio/github-actions-magento2/supported-version@v8.11.0 # x-release-please-version
+        id: supported-version
+        with:
+          kind: latest
+
+  # No dedicated PHPMD action exists in graycoreio/github-actions-magento2 yet,
+  # so this mirrors the pattern of its coding-standard/phpstan jobs directly.
+  phpmd:
+    runs-on: ${{ matrix.os }}
+    needs: compute_latest_matrix
+    strategy:
+      matrix: ${{ fromJSON(needs.compute_latest_matrix.outputs.matrix) }}
+    steps:
+      - uses: actions/checkout@v7
+
+      - uses: shivammathur/setup-php@v2
+        with:
+          php-version: ${{ matrix.php }}
+          tools: composer:v${{ matrix.composer }}
+          coverage: none
+
+      - uses: graycoreio/github-actions-magento2/cache-magento@v8.11.0 # x-release-please-version
+
+      - run: composer install
+
+      - run: vendor/bin/phpmd . text phpmd-ruleset.xml
